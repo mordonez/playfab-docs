@@ -25,7 +25,7 @@ downloaded directly from Microsoft Learn when you run the builder.
 
 ## Video walkthrough
 
-[![Watch the real terminal installation and first Codex question](docs/assets/playfab-context-builder-demo.png)](https://raw.githubusercontent.com/mordonez/playfab-docs/main/docs/assets/playfab-context-builder-demo.webm)
+[![Watch the real terminal installation and first Codex question](docs/assets/playfab-context-builder-demo.png)](https://cdn.jsdelivr.net/gh/mordonez/playfab-docs@main/docs/assets/playfab-context-builder-demo.webm)
 
 Select the image to play the WebM recording of the complete installation and
 first documented Codex answer.
