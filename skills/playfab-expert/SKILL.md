@@ -15,12 +15,12 @@ If `$DOCS_DIR/reports/search_index.jsonl` is absent or empty, tell the user to r
 
 ```bash
 uvx --from crawl4ai crawl4ai-setup
-uvx playfab-context-builder
+uvx --from git+https://github.com/mordonez/playfab-docs@v0.1.0 playfab-context-builder
 ```
 
 Do not start a full build during an ordinary question. It can take significant time and the user should decide when to wait.
 
-If the latest `reports/summary.json` is older than seven days, mention that the library may be stale and continue answering from it. The refresh command is `uvx playfab-context-builder`.
+If the latest `reports/summary.json` is older than seven days, mention that the library may be stale and continue answering from it. The refresh command is `uvx --from git+https://github.com/mordonez/playfab-docs@v0.1.0 playfab-context-builder`.
 
 ## 2. Discover, read, answer
 
@@ -54,8 +54,7 @@ If the latest `reports/summary.json` is older than seven days, mention that the 
 ## 5. Useful diagnostics
 
 ```bash
-uvx --from playfab-context-builder playfab-context-builder-doctor
+uvx --from git+https://github.com/mordonez/playfab-docs@v0.1.0 playfab-context-builder-doctor
 ```
 
 The doctor checks library presence, freshness, index size, abandoned staging directories, and skill installation. It does not crawl or install anything.
-

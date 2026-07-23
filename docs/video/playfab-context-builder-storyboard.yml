@@ -1,0 +1,67 @@
+output: docs/assets/playfab-context-builder-demo.webm
+
+server:
+- ttyd
+- --writable
+- --port
+- "7681"
+- --cwd
+- /tmp/playfab-video-workspace
+- --client-option
+- fontSize=18
+- --client-option
+- cursorBlink=true
+- env
+- PLAYFAB_DOCS_DIR=/tmp/playfab-demo-docs
+- PLAYWRIGHT_BROWSERS_PATH=/tmp/playfab-demo-browsers
+- HISTFILE=/dev/null
+- "PS1=playfab-demo % "
+- zsh
+- -f
+
+url: http://127.0.0.1:7681/
+
+viewport:
+  width: 1280
+  height: 720
+
+wait_for: ".xterm-helper-textarea"
+
+scenes:
+- name: Prepare Crawl4AI
+  do:
+  - pause: 2
+  - click: ".xterm-screen"
+  - type:
+      into: ".xterm-helper-textarea"
+      text: "uvx --from crawl4ai crawl4ai-setup"
+      delay_ms: 25
+  - press: Enter
+  - pause: 15
+
+- name: Build a five-page PlayFab Documentation Library
+  do:
+  - type:
+      into: ".xterm-helper-textarea"
+      text: "uvx --from git+https://github.com/mordonez/playfab-docs@v0.1.0 playfab-context-builder --max-pages 5 --use-cache"
+      delay_ms: 20
+  - press: Enter
+  - pause: 50
+
+- name: Install PlayFab Expert for Codex
+  do:
+  - type:
+      into: ".xterm-helper-textarea"
+      text: "npx --yes skills add mordonez/playfab-docs --skill playfab-expert --agent codex --global --yes"
+      delay_ms: 15
+  - press: Enter
+  - pause: 20
+
+- name: Ask PlayFab Expert from a real Codex session
+  do:
+  - type:
+      into: ".xterm-helper-textarea"
+      text: "codex exec --ephemeral --sandbox read-only --skip-git-repo-check 'Usa $playfab-expert para responder en español: ¿Cómo construirías un MVP de dashboard que consuma PlayFab y se despliegue en Vercel? Da una recomendación elaborada, arquitectura, estrategia de datos, seguridad y fases de entrega, citando la documentación oficial.'"
+      delay_ms: 4
+  - press: Enter
+  - pause: 150
