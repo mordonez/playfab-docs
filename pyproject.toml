@@ -1,0 +1,41 @@
+[project]
+name = "playfab-context-builder"
+version = "0.1.0"
+description = "Build a local, cited PlayFab documentation library for the playfab-expert agent skill."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "beautifulsoup4>=4.12,<5",
+    "crawl4ai>=0.9,<1.0",
+]
+
+[project.scripts]
+playfab-context-builder = "playfab_docs.pipeline:main"
+playfab-context-builder-doctor = "playfab_docs.doctor:main"
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/playfab_docs"]
+
+[dependency-groups]
+dev = [
+    "build>=1.2",
+    "pytest>=8.0",
+    "ruff>=0.9",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+markers = ["live: opt-in tests that access Microsoft Learn through Crawl4AI"]
+
